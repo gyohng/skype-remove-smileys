@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# When on Windows, run as Administrator
+
 import os, sys
 fname = 'app.asar'
 
@@ -7,8 +9,11 @@ if not os.path.isfile(fname):
     fname = '/Applications/Skype.app/Contents/Resources/app.asar'
 
 if not os.path.isfile(fname):
+    fname = "C:/Program Files (x86)/Microsoft/Skype for Desktop/resources/app.asar" 
+
+if not os.path.isfile(fname):
     print('Copy this script to the same folder '
-        'with app.asar is before running')
+          'with app.asar is before running')
     sys.exit(-1)
 
 with open(fname,"rb") as f:
@@ -35,13 +40,31 @@ data = data.replace(
     b',e.size=18):(e.icon=n(11).SkypeIcon.EmoticonStroke,',
     b',e.size=18):(e.icon="\xEE\x90\x9F",e.size=18,'
     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
-)  
+)
 
-# the most obnoxious one next to the message
+# emoji keyboard popup, Skype 8.38.0.161
+data = data.replace(
+    b',e.size=18):(e.icon=n(10).SkypeIcon.EmoticonStroke,',
+    b',e.size=18):(e.icon="\xEE\x90\x9F",e.size=18,'
+    b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+) 
+
+# the most obnoxious one next to the message for various Skype versions
 data = data.replace(
     b'default:return n(11).SkypeIcon.EmoticonStroke}},',
     b'default:return ""/*).SkypeIcon.EmoticonStro*/}},',
 )
+
+data = data.replace(
+    b'default:return n(10).SkypeIcon.EmoticonStroke}},',
+    b'default:return ""/*).SkypeIcon.EmoticonStro*/}},',
+)
+
+data = data.replace(
+    b't.size=18):(t.icon=n(10).SkypeIcon.EmoticonStroke,',
+    b't.size=18):(t.icon="\xEE\x90\x9F",t.size=18,\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+)
+
 
 with open(fname,"wb") as f:
     f.write(data)
