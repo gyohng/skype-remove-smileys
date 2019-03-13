@@ -65,6 +65,10 @@ data = data.replace(
     b't.size=18):(t.icon="\xEE\x90\x9F",t.size=18,\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
 )
 
+data = data.replace(
+    b'void 0,icon:n(10).SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*).SkypeIcon.EmoticonStro*/,'
+)
 
 with open(fname,"wb") as f:
     f.write(data)
