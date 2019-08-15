@@ -42,10 +42,10 @@ data = data.replace(
     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
 )
 
-# emoji keyboard popup, Skype 8.38.0.161
+# emoji keyboard popup, Skype 8.38.0.161, 8.51.0.72
 data = data.replace(
-    b',e.size=18):(e.icon=n(10).SkypeIcon.EmoticonStroke,',
-    b',e.size=18):(e.icon="\xEE\x90\x9F",e.size=18,'
+    b':(e.icon=n(10).SkypeIcon.EmoticonStroke,',
+    b':(e.icon="\xEE\x90\x9F",e.size=18,'
     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
 ) 
 
