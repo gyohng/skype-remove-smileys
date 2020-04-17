@@ -19,21 +19,6 @@ if not os.path.isfile(fname):
 with open(fname,"rb") as f:
     data = f.read()
 
-# this probably is an unnecessary replace - can't find where this one goes to
-# data = data.replace(
-#     b'_onKeyboardButtonClick}:{icon:n(11).SkypeIcon.EmoticonStroke,',
-#     b'_onKeyboardButtonClick}:'
-#     b'{icon:"\xEE\x90\x9F",size:18,'
-#     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
-# )
-
-# previous skype version, emoji keyboard popup button
-data = data.replace(
-    b't.size=18):(t.icon=n(11).SkypeIcon.EmoticonStroke,',
-    b't.size=18):'
-    b'(t.icon="\xEE\x90\x9F",t.size=18,'
-    b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
-)
 
 # emoji keyboard popup, Skype 8.36.0.52
 data = data.replace(
@@ -49,6 +34,26 @@ data = data.replace(
     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
 ) 
 
+# emoji keyboard popup Skype 8.59.0.77
+data = data.replace(
+    b'.size18):(e.icon=n(9).SkypeIcon.EmoticonStroke,',
+    b'.size18):(e.icon="\xEE\x90\x9F",e.size=18,\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+)
+
+# emoji keyboard popup Skype xxxx
+data = data.replace(
+    b't.size=18):(t.icon=n(10).SkypeIcon.EmoticonStroke,',
+    b't.size=18):(t.icon="\xEE\x90\x9F",t.size=18,\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+)
+
+# emoji keyboard popup Skype yyyy
+data = data.replace(
+    b't.size=18):(t.icon=n(11).SkypeIcon.EmoticonStroke,',
+    b't.size=18):'
+    b'(t.icon="\xEE\x90\x9F",t.size=18,'
+    b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+)
+
 # the most obnoxious one next to the message for various Skype versions
 data = data.replace(
     b'default:return n(11).SkypeIcon.EmoticonStroke}},',
@@ -61,16 +66,23 @@ data = data.replace(
 )
 
 data = data.replace(
-    b't.size=18):(t.icon=n(10).SkypeIcon.EmoticonStroke,',
-    b't.size=18):(t.icon="\xEE\x90\x9F",t.size=18,\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
-)
-
-data = data.replace(
     b'void 0,icon:n(10).SkypeIcon.EmoticonStroke,',
     b'void 0,icon:""/*).SkypeIcon.EmoticonStro*/,'
 )
 
+data = data.replace(
+    b'void 0,icon:n(9).SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*.SkypeIcon.EmoticonStro*/,'
+)
+
+print('Patching file: '+fname)
 with open(fname,"wb") as f:
     f.write(data)
 
 print('Patching done')
+
+# change False to True: code for printing potential replacement candidates for a new Skype version
+while False:
+    idx = data.index(b'SkypeIcon.EmoticonStroke')
+    print(data[idx-32:idx+64])
+    data = data[:idx] + b'Q' + data[idx+1:]
