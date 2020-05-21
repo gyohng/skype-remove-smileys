@@ -20,6 +20,13 @@ with open(fname,"rb") as f:
     data = f.read()
 
 
+# emoji keyboard popup, Skype 8.60.0.76
+data = data.replace(
+    b'=p.IconSize.size18):(e.icon=p.SkypeIcon.EmoticonStroke',
+    b'=p.IconSize.size18):(e.icon="\xEE\x90\x9F"'
+    b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
+)
+
 # emoji keyboard popup, Skype 8.36.0.52
 data = data.replace(
     b',e.size=18):(e.icon=n(11).SkypeIcon.EmoticonStroke,',
@@ -73,6 +80,11 @@ data = data.replace(
 data = data.replace(
     b'void 0,icon:n(9).SkypeIcon.EmoticonStroke,',
     b'void 0,icon:""/*.SkypeIcon.EmoticonStro*/,'
+)
+
+data = data.replace(
+    b'void 0,icon:f.SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*ypeIcon.EmoticonStro*/,'
 )
 
 print('Patching file: '+fname)
