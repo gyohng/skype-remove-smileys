@@ -87,6 +87,12 @@ data = data.replace(
     b'void 0,icon:""/*ypeIcon.EmoticonStro*/,'
 )
 
+data = data.replace(
+    b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:f.SkypeIcon.EmoticonStroke,',
+    b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:""/*ypeIcon.EmoticonStro*/,'
+)
+
+
 print('Patching file: '+fname)
 with open(fname,"wb") as f:
     f.write(data)
