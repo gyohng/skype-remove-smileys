@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# When on Windows, run as Administrator
+# on Windows: run as Administrator
+# on Linux: run with sudo
 
 import os, sys
 fname = 'app.asar'
@@ -10,6 +11,9 @@ if not os.path.isfile(fname):
 
 if not os.path.isfile(fname):
     fname = "C:/Program Files (x86)/Microsoft/Skype for Desktop/resources/app.asar" 
+
+if not os.path.isfile(fname):
+    fname = "/usr/share/skypeforlinux/resources/app.asar" 
 
 if not os.path.isfile(fname):
     print('Copy this script to the same folder '
