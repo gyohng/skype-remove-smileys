@@ -65,6 +65,12 @@ data = data.replace(
     b'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'
 )
 
+# emoji keyboard popup Skype 8.72.0.82
+data = data.replace(
+    b'.size18):(e.icon=g.SkypeIcon.EmoticonStroke,',
+    b'.size18):(e.icon=g.SkypeIcon.UpChevron,     ',
+)
+
 # the most obnoxious one next to the message for various Skype versions
 data = data.replace(
     b'default:return n(11).SkypeIcon.EmoticonStroke}},',
