@@ -68,7 +68,7 @@ data = data.replace(
 # emoji keyboard popup Skype 8.72.0.82
 data = data.replace(
     b'.size18):(e.icon=g.SkypeIcon.EmoticonStroke,',
-    b'.size18):(e.icon=g.SkypeIcon.UpChevron,     ',
+    b'.size18):(e.icon="\xEE\x90\x9F",e.size=18,           ',
 )
 
 # the most obnoxious one next to the message for various Skype versions
