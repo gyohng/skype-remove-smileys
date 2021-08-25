@@ -3,7 +3,7 @@
 # on Windows: run as Administrator
 # on Linux: run with sudo
 
-import os, sys
+import os, sys, re
 fname = 'app.asar'
 
 if not os.path.isfile(fname):
@@ -120,6 +120,12 @@ data = data.replace(
 data = data.replace(
     b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:y.SkypeIcon.EmoticonStroke,',
     b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:""/*ypeIcon.EmoticonStro*/,'
+)
+
+data = re.sub(
+    b'void 0:this[.]_onReactKeyPress,size:t,color:e,hoverColor:e,icon:.[.]SkypeIcon[.]EmoticonStroke,',
+    b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:""/*ypeIcon.EmoticonStro*/,',
+    data
 )
 
 print('Patching file: '+fname)
