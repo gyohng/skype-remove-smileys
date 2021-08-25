@@ -98,10 +98,29 @@ data = data.replace(
 )
 
 data = data.replace(
+    b'void 0,icon:b.SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*ypeIcon.EmoticonStro*/,'
+)
+
+data = data.replace(
+    b'void 0,icon:u.SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*ypeIcon.EmoticonStro*/,'
+)
+
+data = data.replace(
+    b'void 0,icon:y.SkypeIcon.EmoticonStroke,',
+    b'void 0,icon:""/*ypeIcon.EmoticonStro*/,'
+)
+
+data = data.replace(
     b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:f.SkypeIcon.EmoticonStroke,',
     b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:""/*ypeIcon.EmoticonStro*/,'
 )
 
+data = data.replace(
+    b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:y.SkypeIcon.EmoticonStroke,',
+    b'void 0:this._onReactKeyPress,size:t,color:e,hoverColor:e,icon:""/*ypeIcon.EmoticonStro*/,'
+)
 
 print('Patching file: '+fname)
 with open(fname,"wb") as f:
